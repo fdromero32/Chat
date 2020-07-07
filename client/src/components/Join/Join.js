@@ -1,67 +1,27 @@
-import React, { useState } from "react";
+
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import {
-  Container,
-  CssBaseline,
-  Typography,
-  Input,
-  Button,
-} from "@material-ui/core";
 
-const mystyle = {
-  width: "100%",
-  marginTop: "20px",
-};
+import './Join.css';
 
-const main = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
-
-const Join = () => {
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
+export default function SignIn() {
+  const [name, setName] = useState('');
+  const [room, setRoom] = useState('');
 
   return (
-    <>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div style={main}>
-          <Typography component="h1" variant="h5">
-            ChatRoom 1.0.0
-          </Typography>
-          <form style={mystyle} noValidate autoComplete="off">
-            <Input
-              placeholder="Your Name"
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <Input
-              placeholder="What room?"
-              type="text"
-              onChange={(e) => setRoom(e.target.value)}
-            />
-            {/* if no name or no room, call event preventDefault which will prevent the button to be clicked. */}
-            <Link
-              onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-              to={`/chat?name=${name}&room=${room}`}
-            >
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                style={{marginTop: "20px"}}
-              >
-                Let's go!
-              </Button>
-            </Link>
-          </form>
+    <div className="joinOuterContainer">
+      <div className="joinInnerContainer">
+        <h1 className="heading">Join</h1>
+        <div>
+          <input placeholder="Name" className="joinInput" type="text" onChange={(event) => setName(event.target.value)} />
         </div>
-      </Container>
-    </>
+        <div>
+          <input placeholder="Room" className="joinInput mt-20" type="text" onChange={(event) => setRoom(event.target.value)} />
+        </div>
+        <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
+          <button className={'button mt-20'} type="submit">Sign In</button>
+        </Link>
+      </div>
+    </div>
   );
-};
-
-export default Join;
+}
